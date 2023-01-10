@@ -15,6 +15,7 @@ export default function SellerProfileForm() {
     carType: null,
     licensePlate: '',
   });
+  console.log('profile', profile);
   const saveCardToProfile = React.useCallback(() => {
     const data = window.electron.cardReader.getData();
     if (data) {
@@ -40,5 +41,12 @@ export default function SellerProfileForm() {
       unsubscribe();
     };
   }, [saveCardToProfile]);
-  return <div>fullname: {ready ? <p>{profile.fullname}</p> : null}</div>;
+  return (
+    <div>
+      fullname: {ready ? <p>{profile.fullname}</p> : null}{' '}
+      <button type="button" onClick={saveCardToProfile}>
+        save
+      </button>
+    </div>
+  );
 }
