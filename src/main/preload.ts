@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
+import { PortInfo as InternalPortInfo } from '@serialport/bindings-interface';
 
 export interface CardInfo {
   cid: string;
@@ -25,10 +26,13 @@ export type CardReaderData =
 
 export type Channels = 'ipc-example';
 
+export type PortInfo = InternalPortInfo;
+
 declare global {
   interface Window {
     electron: {
       ipcRenderer: any;
+      getSerialPorts: () => Promise<PortInfo[]>;
       cardReader: {
         check: () => boolean;
         connect: (
@@ -60,6 +64,7 @@ const electronHandler: Window['electron'] = {
       };
     },
   },
+  getSerialPorts: () => ipcRenderer.invoke('get-serial-ports'),
   ipcRenderer: {
     sendMessage(channel: Channels, args: unknown[]) {
       ipcRenderer.send(channel, args);

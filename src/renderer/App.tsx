@@ -2,6 +2,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 import './App.css';
 import SellerProfileForm from './SellerProfileForm';
+import Scale from './Scale';
 
 const Hello = () => {
   return (
@@ -37,6 +38,7 @@ const Hello = () => {
         </a>
       </div>
       <SellerProfileForm />
+      <Scale />
     </div>
   );
 };
