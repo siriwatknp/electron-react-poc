@@ -245,8 +245,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "siriwatknp",
+      "repo": "electron-react-poc"
     }
   },
   "collective": {
