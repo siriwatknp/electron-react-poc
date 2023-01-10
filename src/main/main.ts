@@ -14,6 +14,9 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { initializeCardReader } from './modules/cardReader';
+
+const cardReaderConnection = initializeCardReader();
 
 class AppUpdater {
   constructor() {
@@ -80,6 +83,8 @@ const createWindow = async () => {
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
+
+  cardReaderConnection.add(mainWindow.webContents);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
