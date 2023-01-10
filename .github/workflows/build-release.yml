@@ -38,6 +38,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm install
+      - run: npm run rebuild
       - run: npm run postinstall
       - run: npm run build
 
