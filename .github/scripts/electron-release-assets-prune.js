@@ -14,25 +14,27 @@ module.exports = async (github, context) => {
     }
   );
   const draftRelease = releasesRes.data.find((release) => release.draft);
-  const releaseId = draftRelease.id;
-  console.log(`Deleting release: ${releaseId} assets`);
+  if (draftRelease) {
+    const releaseId = draftRelease.id;
+    console.log(`Deleting release: ${releaseId} assets`);
 
-  const assetsRes = await github.request(
-    'GET /repos/{owner}/{repo}/releases/{releaseId}/assets',
-    {
-      releaseId,
-      ...context.repo,
-    }
-  );
-  const assets = assetsRes.data;
-
-  for (const asset of assets) {
-    await github.request(
-      'DELETE /repos/{owner}/{repo}/releases/assets/{assetId}',
+    const assetsRes = await github.request(
+      'GET /repos/{owner}/{repo}/releases/{releaseId}/assets',
       {
-        assetId: asset.id,
+        releaseId,
         ...context.repo,
       }
     );
+    const assets = assetsRes.data;
+
+    for (const asset of assets) {
+      await github.request(
+        'DELETE /repos/{owner}/{repo}/releases/assets/{assetId}',
+        {
+          assetId: asset.id,
+          ...context.repo,
+        }
+      );
+    }
   }
 };
