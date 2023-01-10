@@ -39,7 +39,7 @@ jobs:
           cache: 'npm'
       - run: npm install --ignore-scripts
       - run: npm run rebuild
-      - run: npm run postinstall
+      # - run: npm run postinstall
       - run: npm run build
 
       - name: Run Electron Builder
