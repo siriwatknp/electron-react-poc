@@ -19,6 +19,8 @@ jobs:
   release:
     needs: prune
     runs-on: ${{ matrix.config.os }}
+    permissions:
+      deployments: write
     strategy:
       matrix:
         # each OS should run separately
