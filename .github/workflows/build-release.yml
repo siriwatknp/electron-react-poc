@@ -1,0 +1,44 @@
+name: Build-Release
+
+on:
+  push:
+    paths-ignore:
+      - functions/**
+      - '.github/workflows/deploy-functions.yml'
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const script = require('./.github/scripts/electron-release-assets-prune.js')
+            await script(github, context)
+  release:
+    needs: prune
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        # each OS should run separately
+        # https://github.com/electron/electron-packager/issues/1051#issuecomment-532377891
+        config:
+          [
+            { os: macos-latest, electronBuilderParam: --mac },
+            { os: windows-latest, electronBuilderParam: --windows },
+          ]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm install
+      - run: npm run postinstall
+      - run: npm run build
+
+      - name: Run Electron Builder
+        run: npm exec electron-builder -- ${{ matrix.config.electronBuilderParam }} --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
