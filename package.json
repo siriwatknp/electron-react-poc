@@ -242,12 +242,7 @@
     },
     "extraResources": [
       "./assets/**"
-    ],
-    "publish": {
-      "provider": "github",
-      "owner": "siriwatknp",
-      "repo": "electron-react-poc"
-    }
+    ]
   },
   "collective": {
     "url": "https://opencollective.com/electron-react-boilerplate-594"
