@@ -26,9 +26,8 @@ jobs:
       matrix:
         # each OS should run separately
         # https://github.com/electron/electron-packager/issues/1051#issuecomment-532377891
-        config:
-          [
-            { os: macos-latest, electronBuilderParam: --mac },
+        config: [
+            # { os: macos-latest, electronBuilderParam: --mac },
             { os: windows-latest, electronBuilderParam: --windows },
           ]
     steps:
@@ -37,8 +36,8 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      - run: npm install --ignore-scripts
-      - run: npm run rebuild
+      - run: npm install
+      # - run: npm run rebuild
       # - run: npm run postinstall
       - run: npm run build
 
