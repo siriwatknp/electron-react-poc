@@ -6,6 +6,9 @@ on:
       - functions/**
       - '.github/workflows/deploy-functions.yml'
 
+permissions:
+  contents: write
+
 jobs:
   prune:
     runs-on: ubuntu-latest
@@ -19,8 +22,6 @@ jobs:
   release:
     needs: prune
     runs-on: ${{ matrix.config.os }}
-    permissions:
-      deployments: write
     strategy:
       matrix:
         # each OS should run separately
