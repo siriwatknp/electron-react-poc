@@ -40,5 +40,5 @@ export default function SellerProfileForm() {
       unsubscribe();
     };
   }, [saveCardToProfile]);
-  return <div>{ready ? <p>{profile.fullname}</p> : null}</div>;
+  return <div>fullname: {ready ? <p>{profile.fullname}</p> : null}</div>;
 }
