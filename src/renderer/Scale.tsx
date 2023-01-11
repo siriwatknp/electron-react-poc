@@ -16,6 +16,7 @@ export default function ScaleSettingPage() {
 
   return (
     <ul>
+      <li role="presentation">ports</li>
       {ports.map((p) => (
         <li key={p.path}>{p.path}</li>
       ))}
