@@ -14,12 +14,12 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-import { initializeCardReader } from './modules/cardReader';
+// import { initializeCardReader } from './modules/cardReader';
 import { initializeSerialPort } from './modules/serialPort';
 
 initializeSerialPort();
 
-const cardReaderConnection = initializeCardReader();
+// const cardReaderConnection = initializeCardReader();
 
 class AppUpdater {
   constructor() {
@@ -87,7 +87,7 @@ const createWindow = async () => {
     },
   });
 
-  cardReaderConnection.add(mainWindow.webContents);
+  // cardReaderConnection.add(mainWindow.webContents);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 

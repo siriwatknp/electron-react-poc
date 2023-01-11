@@ -15,7 +15,6 @@
     "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
   },
   "dependencies": {
-    "serialport": "10.5.0",
-    "thaismartcardreader.js": "0.2.4"
+    "serialport": "10.5.0"
   }
 }
